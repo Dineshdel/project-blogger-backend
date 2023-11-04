@@ -15,7 +15,7 @@ const commentRoute=require('./routes/comments')
 const connectDB=async()=>{
     try{
         await mongoose.connect(process.env.MONGO_URL)
-        console.log("DB is connected successfully!")
+        console.log("database is connected successfully!")
 
     }
     catch(err){
@@ -29,7 +29,7 @@ const connectDB=async()=>{
 dotenv.config()
 app.use(express.json())
 app.use("/images",express.static(path.join(__dirname,"/images")))
-app.use(cors({origin:"https://marvelous-manatee-c41e18.netlify.app",credentials:true}))
+app.use(cors({origin:"https://chimerical-lollipop-56c46e.netlify.app",credentials:true}))
 app.use(cookieParser())
 app.use("/api/auth",authRoute)
 app.use("/api/users",userRoute)
@@ -50,11 +50,11 @@ const storage=multer.diskStorage({
 const upload=multer({storage:storage})
 app.post("/api/upload",upload.single("file"),(req,res)=>{
     // console.log(req.body)
-    res.status(200).json("Image has been uploaded successfully..!")
+    res.status(200).json("Image has been uploaded successfully!")
 })
 
 
 app.listen(process.env.PORT,()=>{
     connectDB()
-    console.log("App is running on port: "+process.env.PORT)
+    console.log("app is running on port "+process.env.PORT)
 })
