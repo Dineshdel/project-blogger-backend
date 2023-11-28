@@ -27,7 +27,7 @@ app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(
   cors({
-    origin: "https://meek-moonbeam-f3d130.netlify.app",
+    origin: "https://soft-malabi-312779.netlify.app/",
     credentials: true,
   })
 );
