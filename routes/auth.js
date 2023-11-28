@@ -37,8 +37,6 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
     const { password, ...info } = user._doc;
-    console.log("er", res);
-    console.log("sr", res.body);
     return res
       .cookie("token", token, {
         httpOnly: true,
