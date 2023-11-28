@@ -37,8 +37,18 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
     const { password, ...info } = user._doc;
-    res.cookie("email", user.email);
-    res.cookie("userId", user._id);
+    res.cookie("email", user.email, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: "none",
+      secure: true,
+    });
+    res.cookie("userId", user._id, {
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+      sameSite: "none",
+      secure: true,
+    });
     res
       .cookie("token", token, {
         httpOnly: true,
