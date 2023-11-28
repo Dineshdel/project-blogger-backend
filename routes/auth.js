@@ -37,19 +37,9 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
     const { password, ...info } = user._doc;
-    res.cookie("email", user.email, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-      sameSite: "none",
-      secure: true,
-    });
-    res.cookie("userId", user._id, {
-      httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
-      sameSite: "none",
-      secure: true,
-    });
-    res
+    const coemail = res.cookie("email", user.email);
+    const userId = res.cookie("userId", user._id);
+    const tokesn = res
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
@@ -57,7 +47,7 @@ router.post("/login", async (req, res) => {
         secure: true,
       })
       .send({ res: "login successfully" });
-    return;
+    return coemail, userId, tokesn;
   } catch (err) {
     res.status(500).json(err);
   }
