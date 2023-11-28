@@ -7,7 +7,7 @@ const Comment = require("../models/Comment");
 const verifyToken = require("../verifyToken");
 
 //CREATE
-router.post("/create", verifyToken, async (req, res) => {
+router.post("/create", async (req, res) => {
   try {
     // console.log(req);
     const newPost = new Post(req.body);
