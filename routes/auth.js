@@ -37,7 +37,9 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
     const { password, ...info } = user._doc;
-    return res
+    res.cookie("email", user.email);
+    res.cookie("userId", user._id);
+    res
       .cookie("token", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
@@ -45,6 +47,7 @@ router.post("/login", async (req, res) => {
         secure: true,
       })
       .send({ res: "login successfully" });
+    return;
   } catch (err) {
     res.status(500).json(err);
   }
@@ -57,6 +60,8 @@ router.get("/logout", async (req, res) => {
       .clearCookie("token", { sameSite: "none", secure: true })
       .status(200)
       .send("User logged out successfully!");
+    localStorage.removeItem("email");
+    localStorage.removeItem("userId");
   } catch (err) {
     res.status(500).json(err);
   }
