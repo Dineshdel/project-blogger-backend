@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
         sameSite: "none",
         secure: true,
       })
-      .send({ res: "Login Sucessfully" });
+      .send("login successfully");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -57,8 +57,6 @@ router.get("/logout", async (req, res) => {
       .clearCookie("token", { sameSite: "none", secure: true })
       .status(200)
       .send("User logged out successfully!");
-    localStorage.removeItem("email");
-    localStorage.removeItem("userId");
   } catch (err) {
     res.status(500).json(err);
   }
