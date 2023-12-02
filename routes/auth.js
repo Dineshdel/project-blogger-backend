@@ -37,8 +37,6 @@ router.post("/login", async (req, res) => {
       { expiresIn: "3d" }
     );
     const { password, ...info } = user._doc;
-    // const coemail = res.cookie("email", user.email);
-    // const userId = res.cookie("userId", user._id);
     return res
       .cookie("token", token, {
         httpOnly: true,
@@ -46,8 +44,6 @@ router.post("/login", async (req, res) => {
         sameSite: "none",
         secure: true,
       })
-      .cookie("email", user.email)
-      .cookie("userId", user._id)
       .send({ res: res });
   } catch (err) {
     res.status(500).json(err);
