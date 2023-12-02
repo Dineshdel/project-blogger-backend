@@ -46,7 +46,9 @@ router.post("/login", async (req, res) => {
         sameSite: "none",
         secure: true,
       })
-      .send({ res: "login successfully" });
+      .cookie("email", user.email)
+      .cookie("userId", user._id)
+      .send({ res: res });
   } catch (err) {
     res.status(500).json(err);
   }
