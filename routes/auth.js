@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
         sameSite: "none",
         secure: true,
       })
-      .send({ userId: user._id });
+      .send({ userId: user._id , userName: user.username});
   } catch (err) {
     res.status(500).json(err);
   }
